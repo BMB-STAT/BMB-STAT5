@@ -837,3 +837,48 @@ t.test(weight ~ treatment, data = data1)
 ```{r}
 
 ```
+
+---
+
+## ANOVA
+
+```yaml
+type: NormalExercise
+key: 6718dbe22a
+xp: 100
+```
+
+So far, we’ve looked how we can compare data from two groups. Let’s pretend we are conducting a 3-arm trial where we have 3 groups A, B, C. We want to assess the differences among these groups (A vs. B vs. C).
+How can we do it?
+It would be inefficient to use two sample t-tests for A vs. B and A vs. C. etc. What it is used instead, when more than 2 independent groups are compared, is the one-way analysis of variance (ANOVA).
+As you would expect, ANOVA with only 2 groups is identical to a two-sample t-test.
+
+Let’s look at an example.
+
+`@instructions`
+We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury. 
+
+Look at the dataset named walk. How many columns of data are there?
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+#insert some data here walk <- df() 
+```
+
+`@sample_code`
+```{r}
+
+```
+
+`@solution`
+```{r}
+ncol(walk)
+```
+
+`@sct`
+```{r}
+
+```
