@@ -1,7 +1,8 @@
-title: BMB STAT5
-description: Online element of the BMB STAT course.
-university: Imperial College London
+title: "BMB STAT5"
+description: "Online element of the BMB STAT course."
+university: "Imperial College London"
 difficulty_level: 2
-time_needed: 1 hour
+time_needed: "1 hour"
 datasets:
-  STAT5_2.RData: Stat5 2
+STAT5_2.RData: "Stat5 2"
+programming_language: "r"
