@@ -830,7 +830,7 @@ boxplot(weight ~ treatment, data = data1)
 t.test(weight ~ treatment, data = data1)
 
 # t test of weight grouped by treatment - equal variance test
-t.test(weight ~ treatment, data = data1)
+t.test(weight ~ treatment, data = data1, var.equal=TRUE)
 ```
 
 `@sct`
@@ -843,30 +843,282 @@ t.test(weight ~ treatment, data = data1)
 ## ANOVA
 
 ```yaml
-type: NormalExercise
-key: 6718dbe22a
+type: TabExercise
+key: 33023510c1
 xp: 100
 ```
 
-So far, we’ve looked how we can compare data from two groups. Let’s pretend we are conducting a 3-arm trial where we have 3 groups A, B, C. We want to assess the differences among these groups (A vs. B vs. C).
+So far, we’ve looked at how we can compare data from two groups. Let’s imagine we are conducting a 3-arm trial where we have 3 groups A, B, C. We want to assess the differences among these groups (A vs. B vs. C).
 How can we do it?
-It would be inefficient to use two sample t-tests for A vs. B and A vs. C. etc. What it is used instead, when more than 2 independent groups are compared, is the one-way analysis of variance (ANOVA).
+It would be inefficient to use two sample t-tests for A vs. B and A vs. C. etc. What can be used instead, when more than 2 independent groups are compared, is the one-way analysis of variance (ANOVA).
 As you would expect, ANOVA with only 2 groups is identical to a two-sample t-test.
 
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied:
+
+1.	Data needs to be normally distributed
+2.	Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves.
+3.	Equal variances between groups (Homogeneity of variances,Homoscedasticity)
+
 Let’s look at an example.
+
+`@pre_exercise_code`
+```{r}
+#insert some data here 
+walk <- data.frame(A = 1:3, B = 1:3, C = 1:3)
+
+
+```
+
+***
+
+```yaml
+type: NormalExercise
+key: a7f08e629d
+xp: 15
+```
 
 `@instructions`
 We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury. 
 
-Look at the dataset named walk. How many columns of data are there?
+Look at the dataset named walk. 
+
+Create a box plot of the data based on the treatment groups.
+
+`@hint`
+Remember, when you plot a boxplot, you need to define the dataframe and the groups you want to separate the data into.
+
+`@sample_code`
+```{r}
+#create a boxplot of walk by treatment groups
+```
+
+`@solution`
+```{r}
+boxplot(walk~treatment)
+```
+
+`@sct`
+```{r}
+
+```
+
+***
+
+```yaml
+type: NormalExercise
+key: a6f5476d83
+xp: 15
+```
+
+`@instructions`
+From the box plot you could qualitatively appreciate the differences between groups. Let’s now formally assess if the walking speed changes based on treatment received by running an ANOVA analysis.
+
+In R ANOVA is run by using the aov() function. To visualise the output of the analysis the function summary() is used.
+
+Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:treatment.aov<-…) and you to use ~ symbol to group values according to the category they belong to
+
+`@hint`
+Remember, aov needs to work on a dataframe (for example walk) and you need to indicate how the data should be grouped (for example treatment)
+
+`@sample_code`
+```{r}
+#perform ANOVA using the function aov(dataframe~category)
+
+#output the summary
+```
+
+`@solution`
+```{r}
+#perform ANOVA using the function aov(dataframe~category) and assign the output to variable 'ANOVA1'
+ANOVA1 -> aov(dataframe~category)
+#output the summary
+summary(ANOVA1)
+```
+
+`@sct`
+```{r}
+ex() %>% check_function("aov") %>% check_arg("x") %>% check_equal()
+```
+
+***
+
+```yaml
+type: MultipleChoiceExercise
+key: ca7eaa76f7
+xp: 15
+```
+
+`@question`
+What R produces here is referred to as an ANOVA table. In the first column there is the list of the source of Vvriation, between and within groups in separate rows. DF stands for degree of freedom. Between groups DF is n-1, where n is the number of groups being compared. Within groups DF is m-n, where m is the total number of observations/data points collected. 
+
+Choose the correct values of n and m.
+
+`@possible_answers`
+- n = x, m = y
+- n = x, m = z
+- n=y, m= x etc etc
 
 `@hint`
 
 
-`@pre_exercise_code`
+`@sct`
 ```{r}
-#insert some data here walk <- df() 
+
 ```
+
+***
+
+```yaml
+type: MultipleChoiceExercise
+key: 3e143ae483
+xp: 15
+```
+
+`@question`
+Let’s continue to look at the table.
+The third column is the Sum of Squares (quantifies variability between the groups of interest and within groups of interest in separate rows).
+The fourth column is the Mean Squares (Sum of Squares divided by DF on the same row). 
+The fifth column is the F-statistic (Mean squares of row 1/mean squares of row 2). 
+needs a bit more detail - similar to when they calculated in STAT1? check
+Lastly there is the P-value.
+
+From the p-value obtain what can you conclude?
+
+`@possible_answers`
+- Reject the null hypothesis
+- Fail to reject the null hypothesis
+
+`@hint`
+
+
+`@sct`
+```{r}
+
+```
+
+***
+
+```yaml
+type: NormalExercise
+key: 49c0e7e7bc
+xp: 15
+```
+
+`@instructions`
+Great! You now know how to run a one-way ANOVA analysis in R. 
+
+From the p-value obtained we reject the null hypothesis meaning that there are differences between the groups’ means. The ANOVA analysis confirmed this but as it stands now, we do not know where those differences come from (e.g.: is group A different from B or is it C or is B and c that are different?). To determine where those differences exist, we need to run additional analyses: post-hoc tests.
+
+Examples of post-hoc tests are t-tests, and Tukey Honest Significance tests. Corresponding functions in R are: pairwise.t.test() and TukeyHSD().
+
+Use a Tukey test on our walk data to find out where the differences are.
+
+`@hint`
+
+
+`@sample_code`
+```{r}
+#run a Tukey test using TukeyHSD()
+```
+
+`@solution`
+```{r}
+#run a Tukey test using TukeyHSD()
+TukeyHSD(walk~treatment)
+```
+
+`@sct`
+```{r}
+
+```
+
+***
+
+```yaml
+type: MultipleChoiceExercise
+key: 85c50c4ac2
+xp: 15
+```
+
+`@question`
+Take a look at the last column p-adj of the resulting table.
+
+(Does is look like as group A is different from C?)
+
+Which is the most effective treatment to restore a ‘normal’ walking speed?
+
+`@possible_answers`
+- Water-based Physiotherapy
+- Land-based Physiotherapy
+
+`@hint`
+
+
+`@sct`
+```{r}
+
+```
+
+***
+
+```yaml
+type: NormalExercise
+key: 27404e8dff
+xp: 15
+```
+
+`@instructions`
+To run ANOVA in R, data need to be in the same format as the one provided in the example. 
+
+If the data are not in that format you can either use the function ‘stack’ to stack the vectors of your data frame one after another or step by step as shown in the following examples.
+
+`@hint`
+
+
+`@sample_code`
+```{r}
+#Example 1
+#create a vector of the values 1 and 3 and assign it to the variable g1
+g1<-
+#create a vector of the values 4 and 5 and assign it to the variable g2
+g2<-
+#create a dataframe named combined by combining g1 and g2
+combined<-data.frame(cbind(g1,g2))
+#use the function stack on combined to create the desired data format and assign it stacked 
+stacked<-
+```
+
+`@solution`
+```{r}
+#Example 1
+#create a vector of the values 1 and 3 and assign it to the variable g1
+g1<-c(1,3)
+#create a vector of the values 4 and 5 and assign it to the variable g2
+g2<-c(4,5)
+#create a dataframe named combined by combining g1 and g2
+combined<-data.frame(cbind(g1,g2))
+#use the function stack to create the desired data format and assign it stacked 
+stacked<-stack(combined)
+```
+
+`@sct`
+```{r}
+
+```
+
+***
+
+```yaml
+type: NormalExercise
+key: 2ac39db69d
+xp: -5
+```
+
+`@instructions`
+
+
+`@hint`
+
 
 `@sample_code`
 ```{r}
@@ -875,7 +1127,16 @@ Look at the dataset named walk. How many columns of data are there?
 
 `@solution`
 ```{r}
-ncol(walk)
+#Example 2
+Given a 12x3 matrix called data where 3 are the groups: a,b,c.
+Groups<-c(rep(‘a’,12), rep(‘b’,12), rep(‘c’,12))
+Speed <-c(data$a, data$b, data$c)
+df<-data.frame(Groups,speed)
+
+Create a stacked variable given the 3 following vectors:
+A= [3,5,6,7]
+B= [7,8,10,11]
+D= [4,4,5,6]
 ```
 
 `@sct`
