@@ -925,12 +925,13 @@ Remember, aov needs to work on a dataframe (for example walk) and you need to in
 #perform ANOVA using the function aov(dataframe~category)
 
 #output the summary
+
 ```
 
 `@solution`
 ```{r}
 #perform ANOVA using the function aov(dataframe~category) and assign the output to variable 'ANOVA1'
-ANOVA1 -> aov(dataframe~category)
+ANOVA1 -> aov(data$walkinspeed~data$treatment)
 #output the summary
 summary(ANOVA1)
 ```
@@ -949,7 +950,9 @@ xp: 15
 ```
 
 `@question`
-What R produces here is referred to as an ANOVA table. In the first column there is the list of the source of Vvriation, between and within groups in separate rows. DF stands for degree of freedom. Between groups DF is n-1, where n is the number of groups being compared. Within groups DF is m-n, where m is the total number of observations/data points collected. 
+What R produces here is referred to as an ANOVA table. In the first column there is the list of the source of variation, between and within groups in separate rows. DF stands for degree of freedom. Look back to STAT1 to remind yourself of what degrees of freedom are. 
+Between groups DF is n-1, where n is the number of groups being compared. 
+Within groups DF is m-n, where m is the total number of observations/data points collected. 
 
 Choose the correct values of n and m.
 
@@ -979,8 +982,9 @@ Let’s continue to look at the table.
 The third column is the Sum of Squares (quantifies variability between the groups of interest and within groups of interest in separate rows).
 The fourth column is the Mean Squares (Sum of Squares divided by DF on the same row). 
 The fifth column is the F-statistic (Mean squares of row 1/mean squares of row 2). 
-needs a bit more detail - similar to when they calculated in STAT1? check
-Lastly there is the P-value.
+These should sound familiar from STAT1, when we were calculating standard deviation.
+
+Lastly there is the p-value.
 
 From the p-value obtain what can you conclude?
 
@@ -1128,7 +1132,7 @@ xp: -5
 `@solution`
 ```{r}
 #Example 2
-Given a 12x3 matrix called data where 3 are the groups: a,b,c.
+Given a 12x3 matrix (assigned data) called data where 3 are the groups: a,b,c.
 Groups<-c(rep(‘a’,12), rep(‘b’,12), rep(‘c’,12))
 Speed <-c(data$a, data$b, data$c)
 df<-data.frame(Groups,speed)
