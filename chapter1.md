@@ -892,23 +892,19 @@ Remember, when you plot a boxplot, you need to define the dataframe and the grou
 
 `@sample_code`
 ```{r}
-#use names() to check column names
-
 #create a boxplot of walk by treatment groups
 
 ```
 
 `@solution`
 ```{r}
-#use names() to check column names
-names(walk)
 #create a boxplot of walk by treatment groups
-boxplot(speed~treatment, data=walk)
+boxplot(walk$speed~walk$treatment)
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("boxplot") %>% check_arg("formula", "data") %>% check_equal()
+ex() %>% check_function("boxplot") %>% check_arg("formula") %>% check_equal()
 ```
 
 ***
