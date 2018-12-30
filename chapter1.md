@@ -386,7 +386,7 @@ t.test(output ~ treatment, data = data2)
 
 `@sct`
 ```{r}
-test_function("t.test", args = c("formula", "data"))
+ex() %>% check_function("t.test") %>% check_arg("x") %>% check_equal()
 ```
 
 ---
@@ -864,7 +864,7 @@ Let’s look at an example.
 `@pre_exercise_code`
 ```{r}
 #insert some data here 
-walk <- data.frame(A = 1:3, B = 1:3, C = 1:3)
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,0.96,0.97,0.96,0.97,1,0.97,0.99,0.95,0.98,1,1.2,0.98,0.99,1,0.97,0.99,0.98,0.98,0.97), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
 
 
 ```
@@ -878,9 +878,12 @@ xp: 15
 ```
 
 `@instructions`
-We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury. 
+We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury.
 
 Look at the dataset named walk. 
+Control = no treatment
+Water = water-based physiotherapy
+Land = land-based physiotherapy 
 
 Create a box plot of the data based on the treatment groups.
 
@@ -889,17 +892,23 @@ Remember, when you plot a boxplot, you need to define the dataframe and the grou
 
 `@sample_code`
 ```{r}
+#use names() to check column names
+
 #create a boxplot of walk by treatment groups
+
 ```
 
 `@solution`
 ```{r}
-boxplot(walk~treatment)
+#use names() to check column names
+names(walk)
+#create a boxplot of walk by treatment groups
+boxplot(speed~treatment, data=walk)
 ```
 
 `@sct`
 ```{r}
-
+ex() %>% check_function("t.test") %>% check_arg("x") %>% check_equal()
 ```
 
 ***
