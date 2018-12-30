@@ -935,8 +935,8 @@ Remember, aov needs to work on a dataframe (for example walk) and you need to in
 
 `@solution`
 ```{r}
-#perform ANOVA using the function aov(dataframe~category) and assign the output to variable 'ANOVA1'
-ANOVA1 -> aov(data$walkinspeed~data$treatment)
+#perform ANOVA using the function aov(data~category) and assign the output to variable 'ANOVA1'
+ANOVA1 <- aov(walk$speed~walk$treatment)
 #output the summary
 summary(ANOVA1)
 ```
