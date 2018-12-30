@@ -908,7 +908,7 @@ boxplot(speed~treatment, data=walk)
 
 `@sct`
 ```{r}
-ex() %>% check_function("t.test") %>% check_arg("x") %>% check_equal()
+ex() %>% check_function("boxplot") %>% check_arg("formula", "data") %>% check_equal()
 ```
 
 ***
