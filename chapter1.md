@@ -864,7 +864,7 @@ Let’s look at an example.
 `@pre_exercise_code`
 ```{r}
 #insert some data here 
-walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,0.96,0.97,0.96,0.97,1,0.97,0.99,0.95,0.98,1,1.2,0.98,0.99,1,0.97,0.99,0.98,0.98,0.97), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
 
 
 ```
@@ -927,7 +927,7 @@ Remember, aov needs to work on a dataframe (for example walk) and you need to in
 
 `@sample_code`
 ```{r}
-#perform ANOVA using the function aov(dataframe~category)
+#perform ANOVA using the function aov(data~category) and assign the output to variable 'ANOVA1'
 
 #output the summary
 
@@ -943,7 +943,7 @@ summary(ANOVA1)
 
 `@sct`
 ```{r}
-ex() %>% check_function("aov") %>% check_arg("x") %>% check_equal()
+ex() %>% check_function("aov") %>% check_arg("formula") %>% check_equal()
 ```
 
 ***
@@ -962,9 +962,10 @@ Within groups DF is m-n, where m is the total number of observations/data points
 Choose the correct values of n and m.
 
 `@possible_answers`
-- n = x, m = y
-- n = x, m = z
-- n=y, m= x etc etc
+- n = 2, m = 42
+- [n = 3, m = 45]
+- n = 3, m = 42
+- n = 2, m = 45
 
 `@hint`
 
@@ -994,7 +995,7 @@ Lastly there is the p-value.
 From the p-value obtain what can you conclude?
 
 `@possible_answers`
-- Reject the null hypothesis
+- [Reject the null hypothesis]
 - Fail to reject the null hypothesis
 
 `@hint`
@@ -1016,9 +1017,9 @@ xp: 15
 `@instructions`
 Great! You now know how to run a one-way ANOVA analysis in R. 
 
-From the p-value obtained we reject the null hypothesis meaning that there are differences between the groups’ means. The ANOVA analysis confirmed this but as it stands now, we do not know where those differences come from (e.g.: is group A different from B or is it C or is B and c that are different?). To determine where those differences exist, we need to run additional analyses: post-hoc tests.
+From the p-value obtained we reject the null hypothesis meaning that there are differences between the groups’ means. The ANOVA analysis confirmed this but as it stands now, we do not know where those differences come from  - e.g.: group A different from B or is it B and C that are different? To determine where those differences exist, we need to run additional analyses: post-hoc tests.
 
-Examples of post-hoc tests are t-tests, and Tukey Honest Significance tests. Corresponding functions in R are: pairwise.t.test() and TukeyHSD().
+A commonly used post-hoc tests is the Tukey Honest Significance tests. The R function is `TukeyHSD(fit)`, where `fit` is `aov(data~group)`.
 
 Use a Tukey test on our walk data to find out where the differences are.
 
@@ -1028,17 +1029,18 @@ Use a Tukey test on our walk data to find out where the differences are.
 `@sample_code`
 ```{r}
 #run a Tukey test using TukeyHSD()
+
 ```
 
 `@solution`
 ```{r}
 #run a Tukey test using TukeyHSD()
-TukeyHSD(walk~treatment)
+TukeyHSD(ANOVA1)
 ```
 
 `@sct`
 ```{r}
-
+ex() %>% check_function("TukeyHSD") %>% check_arg("x") %>% check_equal()
 ```
 
 ***
