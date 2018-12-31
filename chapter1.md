@@ -918,9 +918,9 @@ xp: 15
 `@instructions`
 From the box plot you could qualitatively appreciate the differences between groups. Let’s now formally assess if the walking speed changes based on treatment received by running an ANOVA analysis.
 
-In R ANOVA is run by using the aov() function. To visualise the output of the analysis the function summary() is used.
+In R ANOVA is run by using the `aov()` function. To visualise the output of the analysis the function `summary()` is used.
 
-Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:treatment.aov<-…) and you to use ~ symbol to group values according to the category they belong to
+Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:`ANOVA1<-`…) and you to use `~` symbol to group values according to the category they belong to
 
 `@hint`
 Remember, aov needs to work on a dataframe (for example walk) and you need to indicate how the data should be grouped (for example treatment)
@@ -1052,22 +1052,26 @@ xp: 15
 ```
 
 `@question`
-Take a look at the last column p-adj of the resulting table.
+Take a look at the resulting table. The first column shows the differences between conditions, and the final column shows the adjusted p values.
 
-(Does is look like as group A is different from C?)
-
-Which is the most effective treatment to restore a ‘normal’ walking speed?
+Which is the most effective treatment to restore walking speed?
 
 `@possible_answers`
 - Water-based Physiotherapy
 - Land-based Physiotherapy
+- Both
+- None
 
 `@hint`
 
 
 `@sct`
 ```{r}
-
+msg1 <- "That's correct - although both comparisons are statistically significant, the difference between means, shown in the first column, is largest between control and the water-based physiotherapy"
+msg2 <- "That's not quite right - although there is a significant difference between control and land-based physiotherapy, there is more information in this table that could help you decide which is most effective"
+msg3 <- "That's not quite right - although both comparisons are statistically significant, there is more information in this table that could help you decide which is most effective"
+msg4 <- "That's not quite right - consider the results again"
+ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2, msg3, msg4))
 ```
 
 ***
@@ -1126,7 +1130,7 @@ xp: -5
 ```
 
 `@instructions`
-
+Here is another way to rearrange data into the standard format required.
 
 `@hint`
 
