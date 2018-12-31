@@ -880,7 +880,7 @@ xp: 15
 `@instructions`
 We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury.
 
-Look at the dataset named walk. 
+Look at the dataset named `walk`. 
 Control = no treatment
 Water = water-based physiotherapy
 Land = land-based physiotherapy 
@@ -920,10 +920,10 @@ From the box plot you could qualitatively appreciate the differences between gro
 
 In R ANOVA is run by using the `aov()` function. To visualise the output of the analysis the function `summary()` is used.
 
-Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:`ANOVA1<-`…) and you to use `~` symbol to group values according to the category they belong to
+Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:`ANOVA1<-`…) and you use the `~` symbol to group values according to the category they belong to.
 
 `@hint`
-Remember, aov needs to work on a dataframe (for example walk) and you need to indicate how the data should be grouped (for example treatment)
+Remember, aov needs to work on data (for example speed) and you need to indicate how the data should be grouped (for example treatment).
 
 `@sample_code`
 ```{r}
@@ -955,8 +955,12 @@ xp: 15
 ```
 
 `@question`
-What R produces here is referred to as an ANOVA table. In the first column there is the list of the source of variation, between and within groups in separate rows. DF stands for degree of freedom. Look back to STAT1 to remind yourself of what degrees of freedom are. 
+What R produces here is referred to as an ANOVA table. 
+The first column, DF, represents the source of variation, both between groups (1st row) and within groups (second row).
+DF stands for degree of freedom. Look back to STAT1 to remind yourself of what degrees of freedom are. 
+
 Between groups DF is n-1, where n is the number of groups being compared. 
+
 Within groups DF is m-n, where m is the total number of observations/data points collected. 
 
 Choose the correct values of n and m.
@@ -985,14 +989,14 @@ xp: 15
 
 `@question`
 Let’s continue to look at the table.
-The third column is the Sum of Squares (quantifies variability between the groups of interest and within groups of interest in separate rows).
+The third column is the Sum of Squares (quantifies variability between the groups of interest and within groups of interest in separate rows). 
 The fourth column is the Mean Squares (Sum of Squares divided by DF on the same row). 
 The fifth column is the F-statistic (Mean squares of row 1/mean squares of row 2). 
 These should sound familiar from STAT1, when we were calculating standard deviation.
 
 Lastly there is the p-value.
 
-From the p-value obtain what can you conclude?
+From the p-value obtained, what can you conclude?
 
 `@possible_answers`
 - [Reject the null hypothesis]
