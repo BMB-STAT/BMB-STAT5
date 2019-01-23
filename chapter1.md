@@ -386,7 +386,7 @@ t.test(output ~ treatment, data = data2)
 
 `@sct`
 ```{r}
-ex() %>% check_function("t.test") %>% check_arg("x") %>% check_equal()
+ex() %>% check_function("t.test") %>% check_arg("formula") %>% check_equal()
 ```
 
 ---
@@ -865,8 +865,13 @@ Let’s look at an example.
 ```{r}
 #insert some data here 
 walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
-
-
+#ANOVA1 for use later
+ANOVA1 <- aov(walk$speed~walk$treatment)
+#data1 for use later
+a<-c(3,5,6,7)
+b<-c(7,8,10,11)
+c<-c(4,4,5,6)
+data1=data.frame(a,b,c)
 ```
 
 ***
@@ -1091,38 +1096,42 @@ To run ANOVA in R, data need to be in the same format as the one provided in the
 
 If the data are not in that format you can either use the function ‘stack’ to stack the vectors of your data frame one after another or step by step as shown in the following examples.
 
+In the dataframe `data1` there are 3 groups to compare: a, b and c. 
+
+Print `data1` - you should notice that this is not the correct format to run ANOVA in R.
+
+The function `stack` can be used to convert this into an appropriate format.
+
+Use `stack` to convert `data` in this way, and print it to the screen to see the difference.
+
 `@hint`
 
 
 `@sample_code`
 ```{r}
 #Example 1
-#create a vector of the values 1 and 3 and assign it to the variable g1
-g1<-
-#create a vector of the values 4 and 5 and assign it to the variable g2
-g2<-
-#create a dataframe named combined by combining g1 and g2
-combined<-data.frame(cbind(g1,g2))
-#use the function stack on combined to create the desired data format and assign it stacked 
-stacked<-
+#print data1
+
+#use the function stack to create the desired data format and assign it stacked 
+
+#print stacked
+
 ```
 
 `@solution`
 ```{r}
 #Example 1
-#create a vector of the values 1 and 3 and assign it to the variable g1
-g1<-c(1,3)
-#create a vector of the values 4 and 5 and assign it to the variable g2
-g2<-c(4,5)
-#create a dataframe named combined by combining g1 and g2
-combined<-data.frame(cbind(g1,g2))
+#print data1
+data1
 #use the function stack to create the desired data format and assign it stacked 
-stacked<-stack(combined)
+stacked<-stack(data1)
+#print stacked
+stacked
 ```
 
 `@sct`
 ```{r}
-
+ex() %>% check_function("stack") %>% check_arg("x") %>% check_equal()
 ```
 
 ***
@@ -1134,31 +1143,61 @@ xp: -5
 ```
 
 `@instructions`
-Here is another way to rearrange data into the standard format required.
+Let's look at another way to rearrange this dataframe `data` into the standard format.
+
+You have previously come across the R function `c()` which allows you to concatenate or join together values into a vector.
+
+You have also previous used `$` to denote which column of a dataframe you are interested in using.
+
+Try using both of these commands to create a vector of all the values in the dataframe `data1`. 
+
+Another useful function is `rep(x, times)` which replicates whatever `x` is, the number of `times` indicated. 
+
+Try using `rep` and `c` to create a vector that indicates which group or column each value of `y` belongs to. 
+
+For example, the first 4 values in the vector y you created come from column a, so you could use `rep("a",4)` to repeat "a" 4 times.
+
+Then you can combine these 2 vectors together into a dataframe, using the function `data.frame()`
 
 `@hint`
+If `data1$a` returns 
+`[1] 3 5 6 7`
+Then `c(data1$a, data1$b)` returns
+`[1]  3  5  6  7  7  8 10 11`
 
+You can nest commands within commands, e.g.
+
+c(rep("a",4),rep("b",4))
+
+but always check that you have closed your brackets!
 
 `@sample_code`
 ```{r}
+#Example 2
+#create a vector named y by concatenating each column of the dataframe data
+y=
+#print y
+
+#create a variable group to indicate which group each value belongs to
+group=c(rep
+#create a dataframe using the function data.frame
 
 ```
 
 `@solution`
 ```{r}
 #Example 2
-Given a 12x3 matrix (assigned data) called data where 3 are the groups: a,b,c.
-Groups<-c(rep(‘a’,12), rep(‘b’,12), rep(‘c’,12))
-Speed <-c(data$a, data$b, data$c)
-df<-data.frame(Groups,speed)
-
-Create a stacked variable given the 3 following vectors:
-A= [3,5,6,7]
-B= [7,8,10,11]
-D= [4,4,5,6]
+#create a vector named y by concatenating each column of the dataframe data
+y=c(data1$a,data1$b,data1$c)
+#print y
+y
+#create a variable group to indicate which group each value belongs to
+group=c(rep("a",4),rep("b",4),rep("c",4))
+#create a dataframe using the function data.frame
+data.frame(y,group)
 ```
 
 `@sct`
 ```{r}
-
+ex() %>% check_function("data.frame") %>% check_arg("formula") %>% check_equal()
 ```
