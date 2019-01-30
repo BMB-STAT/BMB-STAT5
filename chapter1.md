@@ -1,6 +1,7 @@
 ---
 title: 'STAT5 - Hypothesis Testing 2'
 description: 'Hypothesis testing in more detail'
+free_preview: true
 ---
 
 ## One sample t test
