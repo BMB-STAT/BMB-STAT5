@@ -1204,5 +1204,5 @@ example2
 
 `@sct`
 ```{r}
-ex() %>% check_function("data.frame") %>% check_arg("formula") %>% check_equal()
+ex() %>% check_function("data.frame") %>% check_arg("x") %>% check_equal()
 ```
