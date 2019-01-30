@@ -1174,30 +1174,34 @@ but always check that you have closed your brackets!
 `@sample_code`
 ```{r}
 #Example 2
-#create a vector named y by concatenating each column of the dataframe data
-y=
+#create a vector named y by concatenating each column of the dataframe data1
+y <-
 #print y
 
-#create a variable group to indicate which group each value belongs to
-group=c(rep
-#create a dataframe using the function data.frame
+#create a variable group to indicate which column each value originally belonged to
+group <-c(rep
+#create a dataframe from the vectors y and group called example2 using the function data.frame
+example2 <-
+#print example2
 
 ```
 
 `@solution`
 ```{r}
 #Example 2
-#create a vector named y by concatenating each column of the dataframe data
-y=c(data1$a,data1$b,data1$c)
+#create a vector named y by concatenating each column of the dataframe data1
+y <-c(data1$a,data1$b,data1$c)
 #print y
 y
-#create a variable group to indicate which group each value belongs to
-group=c(rep("a",4),rep("b",4),rep("c",4))
-#create a dataframe using the function data.frame
-data.frame(y,group)
+#create a variable group to indicate which column each value originally belonged to
+group <-c(rep("a",4),rep("b",4),rep("c",4))
+#create a dataframe from the vectors y and group called example2 using the function data.frame
+example2 <-data.frame(y,group)
+#print example2
+example2
 ```
 
 `@sct`
 ```{r}
-ex() %>% check_function("data.frame") %>% check_arg("formula") %>% check_equal()
+ex() %>% check_function("data.frame") %>% check_arg("x") %>% check_equal()
 ```
