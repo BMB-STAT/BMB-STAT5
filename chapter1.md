@@ -1160,6 +1160,9 @@ For example, the first 4 values in the vector y you created come from column a, 
 
 Then you can combine these 2 vectors together into a dataframe, using the function `data.frame()`
 
+
+PLEASE NOTE - this is the last exercise. If you encounter an error when you submit this answer, do not waste time trying to find a solution, there is a bug in the code I have not been able to fix. We will go over this last exercise at the beginning of STAT5 in class session.
+
 `@hint`
 If `data1$a` returns 
 `[1] 3 5 6 7`
