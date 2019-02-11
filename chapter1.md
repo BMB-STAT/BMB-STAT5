@@ -893,7 +893,7 @@ We want to test the following null hypothesis:
  
 H0: The mean walking speed is the same in all three groups
 
-Control = no treatment
+Control = healthy volunteers
 Water = water-based physiotherapy
 Land = land-based physiotherapy 
 
@@ -968,7 +968,7 @@ xp: 15
 
 `@question`
 What R produces here is referred to as an ANOVA table. 
-The first column, DF, represents the source of variation, both between groups (1st row) and within groups (second row).
+The first column represents the source of variation, both between groups (1st row - walk$treatment) and within groups (second row - Residuals).
 DF stands for degree of freedom. Look back to STAT1 to remind yourself of what degrees of freedom are. 
 
 Between groups DF is n-1, where n is the number of groups being compared. 
@@ -1007,6 +1007,8 @@ The fifth column is the F-statistic (Mean squares of row 1/mean squares of row 2
 These should sound familiar from STAT1, when we were calculating standard deviation.
 
 Lastly there is the p-value.
+
+We're interested in the first row, differences between the groups (walk$treatment). Therefore we will look at  this p value.
 
 From the p-value obtained, what can you conclude?
 
@@ -1083,11 +1085,11 @@ Which is the most effective treatment to restore walking speed?
 
 `@sct`
 ```{r}
-msg1 <- "That's correct - although both comparisons are statistically significant, the difference between means, shown in the first column, is largest between control and the water-based physiotherapy"
-msg2 <- "That's not quite right - although there is a significant difference between control and land-based physiotherapy, there is more information in this table that could help you decide which is most effective"
-msg3 <- "That's not quite right - although both comparisons are statistically significant, there is more information in this table that could help you decide which is most effective"
-msg4 <- "That's not quite right - consider the results again"
-ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2, msg3, msg4))
+msg1 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this test?" 
+msg2 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this test?"
+msg3 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this test?"
+msg4 <- "That's correct - both comparisons between control and treatment are significantly different, therefore neither treatment has sufficiently improved walking speed"
+ex() %>% check_mc(4, feedback_msgs = c(msg1, msg2, msg3, msg4))
 ```
 
 ***
