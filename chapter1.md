@@ -887,6 +887,12 @@ xp: 15
 We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury.
 
 Look at the dataset named `walk`. 
+If you look at the data, you see that you have 2 columns: one column contains walking speed values (numerical values) and the second column the corresponding groups. These are categorical values. The categorical values dictate how to group your data.
+
+We want to test the following null hypothesis:
+ 
+H0: The mean walking speed is the same in all three groups
+
 Control = no treatment
 Water = water-based physiotherapy
 Land = land-based physiotherapy 
