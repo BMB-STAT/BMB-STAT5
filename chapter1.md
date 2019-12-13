@@ -566,7 +566,7 @@ Although the expression level in the control group varies considerably between r
 
 So how can you analyse the data so that the consistent effect is detected over the variation between replicates?
 
-The paired t test can help because, as the name suggests, it analyses the data in pairs. Try adding the argument `paired = True` to the t test to see how this affects the outcome.
+The paired t test can help because, as the name suggests, it analyses the data in pairs. Try adding the argument `paired = TRUE` to the t test to see how this affects the outcome.
 
 `@instructions`
 Perform a paired t test on `output` grouped by `treatment` in `data2`.
@@ -893,9 +893,9 @@ We want to test the following null hypothesis:
  
 H0: The mean walking speed is the same in all three groups
 
-Control = healthy volunteers
-Water = water-based physiotherapy
-Land = land-based physiotherapy 
+Control = healthy volunteers<br />
+Water = water-based physiotherapy<br />
+Land = land-based physiotherapy <br />
 
 Create a box plot of the data based on the treatment groups.
 
@@ -911,7 +911,7 @@ Remember, when you plot a boxplot, you need to define the dataframe and the grou
 `@solution`
 ```{r}
 #create a boxplot of walk by treatment groups
-boxplot(walk$speed~walk$treatment)
+boxplot(speed ~ treatment, data=walk)
 ```
 
 `@sct`
@@ -948,7 +948,7 @@ Remember, aov needs to work on data (for example speed) and you need to indicate
 `@solution`
 ```{r}
 #perform ANOVA using the function aov(data~category) and assign the output to variable 'ANOVA1'
-ANOVA1 <- aov(walk$speed~walk$treatment)
+ANOVA1 <- aov(speed ~ treatment, data=walk)
 #output the summary
 summary(ANOVA1)
 ```
@@ -1097,7 +1097,7 @@ ex() %>% check_mc(4, feedback_msgs = c(msg1, msg2, msg3, msg4))
 ```yaml
 type: NormalExercise
 key: 27404e8dff
-xp: 15
+xp: 10
 ```
 
 `@instructions`
@@ -1141,79 +1141,4 @@ stacked
 `@sct`
 ```{r}
 ex() %>% check_function("stack") %>% check_arg("x") %>% check_equal()
-```
-
-***
-
-```yaml
-type: NormalExercise
-key: 2ac39db69d
-xp: -5
-```
-
-`@instructions`
-Let's look at another way to rearrange this dataframe `data` into the standard format.
-
-You have previously come across the R function `c()` which allows you to concatenate or join together values into a vector.
-
-You have also previous used `$` to denote which column of a dataframe you are interested in using.
-
-Try using both of these commands to create a vector of all the values in the dataframe `data1`. 
-
-Another useful function is `rep(x, times)` which replicates whatever `x` is, the number of `times` indicated. 
-
-Try using `rep` and `c` to create a vector that indicates which group or column each value of `y` belongs to. 
-
-For example, the first 4 values in the vector y you created come from column a, so you could use `rep("a",4)` to repeat "a" 4 times.
-
-Then you can combine these 2 vectors together into a dataframe, using the function `data.frame()`
-
-
-PLEASE NOTE - this is the last exercise. If you encounter an error when you submit this answer, do not waste time trying to find a solution, there is a bug in the code I have not been able to fix. We will go over this last exercise at the beginning of STAT5 in class session.
-
-`@hint`
-If `data1$a` returns 
-`[1] 3 5 6 7`
-Then `c(data1$a, data1$b)` returns
-`[1]  3  5  6  7  7  8 10 11`
-
-You can nest commands within commands, e.g.
-
-c(rep("a",4),rep("b",4))
-
-but always check that you have closed your brackets!
-
-`@sample_code`
-```{r}
-#Example 2
-#create a vector named y by concatenating each column of the dataframe data1
-y <-
-#print y
-
-#create a variable group to indicate which column each value originally belonged to
-group <-c(rep
-#create a dataframe from the vectors y and group called example2 using the function data.frame
-example2 <-
-#print example2
-
-```
-
-`@solution`
-```{r}
-#Example 2
-#create a vector named y by concatenating each column of the dataframe data1
-y <-c(data1$a,data1$b,data1$c)
-#print y
-y
-#create a variable group to indicate which column each value originally belonged to
-group <-c(rep("a",4),rep("b",4),rep("c",4))
-#create a dataframe from the vectors y and group called example2 using the function data.frame
-example2 <-data.frame(y,group)
-#print example2
-example2
-```
-
-`@sct`
-```{r}
-ex() %>% check_function("data.frame") %>% check_arg("x") %>% check_equal()
 ```
