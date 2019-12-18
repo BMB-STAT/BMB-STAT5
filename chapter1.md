@@ -893,7 +893,7 @@ We want to test the following null hypothesis:
  
 H0: The mean walking speed is the same in all three groups
 
-Control = healthy volunteers<br />
+Control = best existing therapy<br />
 Water = water-based physiotherapy<br />
 Land = land-based physiotherapy <br />
 
