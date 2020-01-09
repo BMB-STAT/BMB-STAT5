@@ -893,9 +893,9 @@ We want to test the following null hypothesis:
  
 H0: The mean walking speed is the same in all three groups
 
-Control = best existing therapy<br />
-Water = water-based physiotherapy<br />
-Land = land-based physiotherapy <br />
+Control = healthy controls<br />
+Water = injured patients after receiving water-based physiotherapy<br />
+Land = injured patients after receiving land-based physiotherapy <br />
 
 Create a box plot of the data based on the treatment groups.
 
@@ -968,20 +968,28 @@ xp: 15
 
 `@question`
 What R produces here is referred to as an ANOVA table. 
-The first column represents the source of variation, both between groups (1st row - walk$treatment) and within groups (second row - Residuals).
-DF stands for degree of freedom. Look back to STAT1 to remind yourself of what degrees of freedom are. 
+The first column represents the source of variation, both between groups (1st row - treatment) and within groups (second row - Residuals).
+DF stands for degree of freedom. 
 
-Between groups DF is n-1, where n is the number of groups being compared. 
+The degree of freedom (df) in statistics is equal to the values that are free to vary without changing the final calculation. 
 
-Within groups DF is m-n, where m is the total number of observations/data points collected. 
+You can think about in another way; if you know the mean of a dataset, you do not need to know all values within that dataset (n) - but n-1, as the last value can be calculated using the others. In this way, n-1 values in the dataset are free to vary without affecting the mean. 
+
+The ANOVA compares the variance of different groups with each other. The number of different groups is known as m. So for example m could be the different kind of treatments or therapies in this case you are comparing with each other. 
+
+Then we are also interested in the number of repeats or replicates which are labelled with the letter n. So in this case the walking speed of 15 patients were recorded for each group. 
+
+Between groups DF is m-1, where m is the number of groups being compared. 
+
+Within groups DF is n-m, where n is the total number of observations/data points collected. 
 
 Choose the correct values of n and m.
 
 `@possible_answers`
-- n = 2, m = 42
-- [n = 3, m = 45]
-- n = 3, m = 42
-- n = 2, m = 45
+- m = 2, n = 42
+- [m = 3, n = 45]
+- m = 3, n = 42
+- m = 2, n = 45
 
 `@hint`
 
@@ -1002,13 +1010,49 @@ xp: 15
 `@question`
 Let’s continue to look at the table.
 The third column is the Sum of Squares (quantifies variability between the groups of interest and within groups of interest in separate rows). 
-The fourth column is the Mean Squares (Sum of Squares divided by DF on the same row). 
-The fifth column is the F-statistic (Mean squares of row 1/mean squares of row 2). 
-These should sound familiar from STAT1, when we were calculating standard deviation.
 
-Lastly there is the p-value.
+The overall sum of squares is square of the difference between each datapoint and the overall mean, also called SST, for sum of squares (total).
 
-We're interested in the first row, differences between the groups (walk$treatment). Therefore we will look at  this p value.
+Within the groups:
+
+The sum of squares within the groups is defined as the square of the difference between each datapoint and the mean of the group it belongs to, also called SSW, for sum of squares (within). This shows the variation among each single groups. 
+
+Between the groups:
+
+The sum of squares within the groups is defined as the square of the difference between each mean of the groups and the overall mean for each datapoint, also called SSB, for sum of squares (between). This shows the variation among between the groups. 
+
+From the ANOVA summary table, identify the correct values for the sum of squares (within) (SSW), and the sum of squares (between) (SSB). 
+
+Remember, ANOVA represents between groups in the first row and within groups in the second row.
+
+`@possible_answers`
+- [SSB = 0.8539, SSW = 0.4535] 
+- SSB = 2, SSW = 0.8539
+- SSB = 42, SSW = 0.4535
+- SSB = 0.4535, SSW = 0.8539
+
+`@hint`
+
+
+`@sct`
+```{r}
+
+```
+
+***
+
+```yaml
+type: MultipleChoiceExercise
+key: c819d61196
+```
+
+`@question`
+The fourth column is the Mean Squares (calculated by taking the Sum of Squares divided by DF on the same row). This is a variance estimate and what is used to calculate the F-statistic, the next column.
+The fifth column is the F-statistic (calculated by Mean squares of row 1/mean squares of row 2). This is defined as the ratio between the Mean Squares between and within. 
+These should sound familiar from STAT1, when we were calculating standard deviation. 
+If this value is large then the chances are high that the variation between the group come from a statistically relevant effect, thus that the Null hypothesis can be rejected. Normally we would need to look up a threshold for the F value with a defined significance level, i.e. α = 0.05 in a table for the degrees of freedom we have here. If the value in the table is lower than we can reject the Null hypothesis.
+
+However, R also calculates the p-value for us, so that we can just use it to make our decision.
 
 From the p-value obtained, what can you conclude?
 
@@ -1022,6 +1066,33 @@ From the p-value obtained, what can you conclude?
 `@sct`
 ```{r}
 
+```
+
+***
+
+```yaml
+type: MultipleChoiceExercise
+key: 8e41b486fa
+```
+
+`@question`
+In your reports or in other publication it is enough to report the most important output of the ANOVA test. It is common to report certain figures:
+
+F(dfbetween, dfwithin) = Test Statistic, p =
+
+What would be the most correct report of our ANOVA test?
+
+`@possible_answers`
+- There was a significant difference in mean walking speed (F(2,42) = 0.8543, 2.21e-10) within the groups.
+- There was a significant difference in mean walking speed (F(3,45) = 39.54, 2.21e-10) between the groups.
+- [There was a significant difference in mean walking speed (F(2, 42) = 39.54, p = 2.21e-10) between the groups.]
+
+`@hint`
+
+
+`@sct`
+```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
 ```
 
 ***
@@ -1072,6 +1143,10 @@ xp: 15
 `@question`
 Take a look at the resulting table. The first column shows the differences between conditions, and the final column shows the adjusted p values.
 
+We are interested in the last column where the p-values are reported. Since both p-values for the land and water treatment are below 0.05, we reject the null hypothesis, and we can state that they are significantly different from the healthy control group. However, there is no significant difference between the land or water walking treatments.
+
+Moreover we can use for example the diff column, which shows the mean difference between each pair, to further explain/justify the results. The land physio group was 0.21 m/s slower than the control and the water physio was even slower.
+
 Which is the most effective treatment to restore walking speed?
 
 `@possible_answers`
@@ -1085,9 +1160,9 @@ Which is the most effective treatment to restore walking speed?
 
 `@sct`
 ```{r}
-msg1 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this test?" 
-msg2 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this test?"
-msg3 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this test?"
+msg1 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this experiment?" 
+msg2 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this experiment?"
+msg3 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this experiment?"
 msg4 <- "That's correct - both comparisons between control and treatment are significantly different, therefore neither treatment has sufficiently improved walking speed"
 ex() %>% check_mc(4, feedback_msgs = c(msg1, msg2, msg3, msg4))
 ```
