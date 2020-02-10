@@ -996,7 +996,13 @@ Choose the correct values of n and m.
 
 `@sct`
 ```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg2 <- "Correct! there are 3 groups being compared, therefore m=3, and there are 45 datapoints collected, therefore n=45"
+msg4 <- "This is incorrect - remember that m corresponds to the number of groups being compared, and n is the total number of data points"
+msg1<-"This is incorrect - remember that m corresponds to the number of groups being compared, and n is the total number of data points"
+msg3 <- "This is incorrect - remember that m corresponds to the number of groups being compared, and n is the total number of data points"
 
+ex() %>% check_mc(2, feedback_msgs = c(msg1, msg2, msg3, msg4))
 ```
 
 ***
@@ -1036,7 +1042,13 @@ Remember, ANOVA represents between groups in the first row and within groups in 
 
 `@sct`
 ```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg1 <- "Correct!"
+msg4 <- "This is incorrect - remember, ANOVA represents between groups in the first row and within groups in the second row."
+msg2<-"This is incorrect - remember, ANOVA represents between groups in the first row and within groups in the second row."
+msg3 <- "This is incorrect - remember, ANOVA represents between groups in the first row and within groups in the second row."
 
+ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2, msg3, msg4))
 ```
 
 ***
@@ -1065,7 +1077,12 @@ From the p-value obtained, what can you conclude?
 
 `@sct`
 ```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg1 <- "Correct! You can see here that if we set our alpha at 0.05, the p value obtained from this analysis is less than 0.05, therefore we can reject the null hypothesis"
+msg4 <- "This is incorrect - the p value is less than alpha, therefore we can reject the null hypothesis"
 
+
+ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2))
 ```
 
 ***
@@ -1093,6 +1110,12 @@ What would be the most correct report of our ANOVA test?
 `@sct`
 ```{r}
 # Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg3 <- "Correct! This contains all the required elements in the correct place to report this result accurately"
+msg1 <- "This is incorrect - the df values are correct, but check that you can correctly identify which is the test statistic."
+msg2<-"This is incorrect - the test statistic is correct, but check that you can identify the degrees of freedom correctly."
+
+
+ex() %>% check_mc(3, feedback_msgs = c(msg1, msg2, msg3))
 ```
 
 ***
