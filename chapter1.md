@@ -1176,7 +1176,7 @@ Which is the most effective treatment to restore walking speed?
 - Water-based Physiotherapy
 - Land-based Physiotherapy
 - Both
-- None
+- [None]
 
 `@hint`
 
