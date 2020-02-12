@@ -1079,7 +1079,7 @@ From the p-value obtained, what can you conclude?
 ```{r}
 # Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
 msg1 <- "Correct! You can see here that if we set our alpha at 0.05, the p value obtained from this analysis is less than 0.05, therefore we can reject the null hypothesis"
-msg4 <- "This is incorrect - the p value is less than alpha, therefore we can reject the null hypothesis"
+msg2 <- "This is incorrect - the p value is less than alpha, therefore we can reject the null hypothesis"
 
 
 ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2))
