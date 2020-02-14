@@ -652,7 +652,7 @@ Hypothesis tests are based on certain assumptions about the data. If the data do
 
 So it is important to check the assumptions of any test you perform.
 
-**Assumption 1: Continuous independent variable and bivariate dependent variable**
+**Assumption 1: Continuous dependent variable and bivariate independent variable**
 
 That's a bit of a mouthful, but it simply means that the outcome variable needs to be continuous, and the experimental variable needs to be categorical. Because the t test can only compare two groups, there can only have two levels for the dependent variable - that's what bivariate means. The underlying data may have more than two levels, but you can only analyse them two at a time with a t test.
 
