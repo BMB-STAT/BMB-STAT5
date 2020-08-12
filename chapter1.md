@@ -638,7 +638,7 @@ test_mc(correct = 2)
 
 ---
 
-## Assumptions of the t test (1)
+## Assumptions of the t test (old)
 
 ```yaml
 type: MultipleChoiceExercise
@@ -648,15 +648,11 @@ xp: 50
 skills: 1
 ```
 
-Hypothesis tests are based on certain assumptions about the data. If the data do not fit these assumptions, the probability calculations underlying the test are likely to be incorrect. This could increase the chance of false positive or false negative results with potentially serious consequences.
+In the pre-session we have introduced you to the three assumption of a t-test that needs to be fulfilled so we can perform a t-test on the sample. While we can determine if the data set contains a continuous dependent and a bivariate independent variable by looking at the data, we can use some plots in R to establish the other two assumptions: **normal distribution and equal variance**.  
 
-So it is important to check the assumptions of any test you perform.
+Remember we can look at a histogram of the data to verify normal distribution. 
 
-**Assumption 1: Continuous dependent variable and bivariate independent variable**
 
-That's a bit of a mouthful, but it simply means that the outcome variable needs to be continuous, and the experimental variable needs to be categorical. Because the t test can only compare two groups, there can only have two levels for the dependent variable - that's what bivariate means. The underlying data may have more than two levels, but you can only analyse them two at a time with a t test.
-
-Which of the following analyses fulfills this first assumption:
 
 `@possible_answers`
 - Testing whether the genotype of transgenic mice (homozygous, heterozygous or wild type for mutation A) affects the blood glucose level.
@@ -675,168 +671,6 @@ Which of the following analyses fulfills this first assumption:
 `@sct`
 ```{r}
 test_mc(correct = 2)
-```
-
----
-
-## Assumptions of the t test (2)
-
-```yaml
-type: NormalExercise
-key: cd73744d94
-lang: r
-xp: 100
-skills: 1
-```
-
-**Assumption 2: Normal distribution**
-
-The t test assumes the underlying population has a normal distribution. Remember, that this refers to the population, rather than your sample. If your sample appears normally distributed, this is a good indication that the population is too.
-
-The simplest way to assess normality, is to look at a histogram of the data.
-
-`@instructions`
-Draw a histogram of the `heights` data you used for the one sample t test.
-
-`@hint`
-
-
-`@pre_exercise_code`
-```{r}
-set.seed(967)
-heights <- rnorm(n = 20, mean = 163.1548 + 4, sd = 6.5409)
-```
-
-`@sample_code`
-```{r}
-# Histogram of heights
-
-```
-
-`@solution`
-```{r}
-# Histogram of heights
-hist(heights)
-```
-
-`@sct`
-```{r}
-test_function("hist", args = "x")
-```
-
----
-
-## Assumptions of the t test (3)
-
-```yaml
-type: NormalExercise
-key: e1591a53fc
-lang: r
-xp: 100
-skills: 1
-```
-
-As you can see, the data appear to follow a roughly normal distribution, with most values clustered around the mean and fairly symmetrical tails.
-
-A normal quantile-quantile plot (Q-Q plot) is slightly more complicated but gives a clearer indication. This compares the quantiles (another name for percentiles) of your data with the theoretical quantiles from a normal distribution.
-
-If that sounds like gobbledygook, don't worry. All you have to do, is see how well the data fall along a straight line.
-
-`@instructions`
-Use the `qqnorm()` and `qqline()` functions to test whether the `heights` data appear normally distributed.
-
-`@hint`
-
-
-`@pre_exercise_code`
-```{r}
-set.seed(967)
-heights <- rnorm(n = 20, mean = 163.1548 + 4, sd = 6.5409)
-hist(heights)
-```
-
-`@sample_code`
-```{r}
-# Normal Q-Q plot of heights
-
-
-# Add line to Q-Q plot of heights
-
-```
-
-`@solution`
-```{r}
-# Normal Q-Q plot of heights
-qqnorm(heights)
-
-# Add line to Q-Q plot of heights
-qqline(heights)
-
-```
-
-`@sct`
-```{r}
-test_function("qqnorm", args = "y")
-test_function("qqline", args = "y")
-```
-
----
-
-## Assumptions of the t test (4)
-
-```yaml
-type: NormalExercise
-key: 73bcc6232e
-lang: r
-xp: 100
-skills: 1
-```
-
-**Assumption 3: Equal variance**
-
-The t test *usually* assumes that the two populations from which the samples have been taken have equal variance. In other words, the spread or dispersion of the values should be similar. You can check this by looking at the variance using summary statistics. (You could also check the standard deviation, since this is just the square root of the variance.)
-
-*Actually* by default R uses the Welch's t test, which does not assume equal variance. If you are confident that the variance of your two samples are equal, you can specify this with argument `var.equal = TRUE`. This will increase the power of the test a little, but is most situations there's little advantage.
-
-`@instructions`
-
-
-`@hint`
-
-
-`@pre_exercise_code`
-```{r}
-load(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_6314/datasets/STAT5_1.RData"))
-# boxplot(weight ~ treatment, data = data1)
-```
-
-`@sample_code`
-```{r}
-# Boxplot of weight grouped by treatment
-boxplot(weight ~ treatment, data = data1)
-
-# t test of weight grouped by treatment - unequal variance test
-t.test(weight ~ treatment, data = data1)
-
-# t test of weight grouped by treatment - equal variance test
-
-```
-
-`@solution`
-```{r}
-# Boxplot of weight grouped by treatment
-boxplot(weight ~ treatment, data = data1)
-
-# t test of weight grouped by treatment - unequal variance test
-t.test(weight ~ treatment, data = data1)
-
-# t test of weight grouped by treatment - equal variance test
-t.test(weight ~ treatment, data = data1, var.equal=TRUE)
-```
-
-`@sct`
-```{r}
-
 ```
 
 ---
@@ -1222,6 +1056,658 @@ Use `stack` to convert `data` in this way, and print it to the screen to see the
 #use the function stack to create the desired data format and assign it stacked 
 
 #print stacked
+
+```
+
+`@solution`
+```{r}
+#Example 1
+#print data1
+data1
+#use the function stack to create the desired data format and assign it stacked 
+stacked<-stack(data1)
+#print stacked
+stacked
+```
+
+`@sct`
+```{r}
+ex() %>% check_function("stack") %>% check_arg("x") %>% check_equal()
+```
+
+---
+
+## Assumptions of the t test (1)
+
+```yaml
+type: NormalExercise
+key: cd73744d94
+lang: r
+xp: 100
+skills: 1
+```
+
+In the pre-session we have introduced you to the three assumption of a t-test that needs to be fulfilled so we can perform a t-test on the sample. While we can determine if the data set contains a continuous dependent and a bivariate independent variable by looking at the data, we can use some plots in R to establish the other two assumptions: **normal distribution and equal variance**.  
+
+Remember we can look at a histogram of the data to verify normal distribution. 
+
+`@instructions`
+Draw a histogram of the `heights` data you used for the one sample t test.
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+set.seed(967)
+heights <- rnorm(n = 20, mean = 163.1548 + 4, sd = 6.5409)
+```
+
+`@sample_code`
+```{r}
+# Histogram of heights
+
+```
+
+`@solution`
+```{r}
+# Histogram of heights
+hist(heights)
+```
+
+`@sct`
+```{r}
+test_function("hist", args = "x")
+```
+
+---
+
+## Assumptions of the t test (2)
+
+```yaml
+type: NormalExercise
+key: e1591a53fc
+lang: r
+xp: 100
+skills: 1
+```
+
+The data seems to follow roughly a normal distribution. There was another plot that helps us to check if the data is normally distributed: the QQ plot. 
+
+Use the qqnorm() and qqline() function to test whether the heights data appear normally distributed. 
+
+`@instructions`
+Use the `qqnorm()` and `qqline()` functions to test whether the `heights` data appear normally distributed.
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+set.seed(967)
+heights <- rnorm(n = 20, mean = 163.1548 + 4, sd = 6.5409)
+hist(heights)
+```
+
+`@sample_code`
+```{r}
+# Normal Q-Q plot of heights
+
+
+# Add line to Q-Q plot of heights
+
+```
+
+`@solution`
+```{r}
+# Normal Q-Q plot of heights
+qqnorm(heights)
+
+# Add line to Q-Q plot of heights
+qqline(heights)
+
+```
+
+`@sct`
+```{r}
+test_function("qqnorm", args = "y")
+test_function("qqline", args = "y")
+```
+
+---
+
+## Assumptions of the t test (3)
+
+```yaml
+type: NormalExercise
+key: 73bcc6232e
+lang: r
+xp: 100
+skills: 1
+```
+
+Finally, we need to check if the variance of the samples we are comparing is equal. To do so, we can use summary statistics like the _boxplot_ function. 
+
+Remember that R automatically uses the Welch’s t-test that does not assume equal variance. But if we are certain that our samples show equal variance, we can specify this by adding the argument var.equal=TRUE in our code. 
+
+`@instructions`
+
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+load(url("http://s3.amazonaws.com/assets.datacamp.com/production/course_6314/datasets/STAT5_1.RData"))
+# boxplot(weight ~ treatment, data = data1)
+```
+
+`@sample_code`
+```{r}
+# Boxplot of weight grouped by treatment
+
+
+# t test of weight grouped by treatment - unequal variance test
+
+
+# t test of weight grouped by treatment - equal variance test
+
+```
+
+`@solution`
+```{r}
+# Boxplot of weight grouped by treatment
+boxplot(weight ~ treatment, data = data1)
+
+# t test of weight grouped by treatment - unequal variance test
+t.test(weight ~ treatment, data = data1)
+
+# t test of weight grouped by treatment - equal variance test
+t.test(weight ~ treatment, data = data1, var.equal=TRUE)
+```
+
+`@sct`
+```{r}
+
+```
+
+---
+
+## ANOVA (1)
+
+```yaml
+type: NormalExercise
+key: b01bf1a570
+xp: 100
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+`@instructions`
+We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury. 
+
+Look at the dataset named walk. If you look at the data, you see that you have 2 columns: one column contains walking speed values (numerical values) and the second column the corresponding groups. These are categorical values. The categorical values dictate how to group your data. 
+
+We want to test the following null hypothesis: 
+
+H0: The mean walking speed is the same in all three groups 
+
+- Control = injured patients that did not receive any treatment 
+- Water = injured patients after receiving water-based physiotherapy 
+- Land = injured patients after receiving land-based physiotherapy
+
+Create a box plot of the data based on the treatment groups.
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+#insert some data here 
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
+```
+
+`@sample_code`
+```{r}
+# create a boxplot of walk by treatment groups 
+```
+
+`@solution`
+```{r}
+# create a boxplot of walk by treatment groups 
+boxplot(speed~treatment, data=walk) 
+```
+
+`@sct`
+```{r}
+ex() %>% check_function("boxplot") %>% check_arg("formula") %>% check_equal()
+```
+
+---
+
+## ANOVA (2)
+
+```yaml
+type: NormalExercise
+key: 23d47c9d49
+xp: 100
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+`@instructions`
+From the box plot you could qualitatively appreciate the differences between groups. Let’s now formally assess if the walking speed changes based on treatment received by running an ANOVA analysis. 
+
+In R ANOVA is run by using the _aov()_ function. To visualise the output of the analysis the function _summary()_ is used. 
+
+Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:ANOVA1<-…) and you use the ~ symbol to group values according to the category they belong to.
+
+`@hint`
+Remember, aov needs to work on data (for example speed) and you need to indicate how the data should be grouped (for example treatment).
+
+`@pre_exercise_code`
+```{r}
+#insert some data here 
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
+```
+
+`@sample_code`
+```{r}
+# perform ANOVA using the function aov(data~category) and assign the output to variable 'ANOVA1' 
+
+# output the summary  
+```
+
+`@solution`
+```{r}
+# perform ANOVA using the function aov(data~category) and assign the output to variable 'ANOVA1' 
+ANOVA1<-aov(speed~treatment, data=walk) 
+
+# output the summary 
+summary(ANOVA1)  
+```
+
+`@sct`
+```{r}
+ex() %>% check_function("aov") %>% check_arg("formula") %>% check_equal()
+```
+
+---
+
+## ANOVA (3)
+
+```yaml
+type: MultipleChoiceExercise
+key: e9958f5697
+xp: 50
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+R represents the results of an ANOVA in a table. The first column represents the source of variation, both between groups (1st row - treatment) and within groups (second row - Residuals). DF stands for degree of freedom. 
+
+The second column represents the degree of freedom (df). We have introduced the two different degrees of freedom in an ANOVA and how they are related to the number of groups (K) and the overall observations/replicates.  
+
+**By looking at the table can you conclude from the degree of freedom values the correct number of groups/samples (K) and the total number of observation (N)?** 
+
+`@possible_answers`
+- K = 2, N = 42
+- [K = 3, N = 45]
+- K = 4, N = 42
+- K = 2, N = 45
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+
+```
+
+`@sct`
+```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg2 <- "Correct! there are 3 groups being compared, therefore K = 3, and there are 45 datapoints collected, therefore N = 45"
+msg4 <- "This is incorrect - remember that K corresponds to the number of groups being compared, and N is the total number of data points"
+msg1<-"This is incorrect - remember that K corresponds to the number of groups being compared, and N is the total number of data points"
+msg3 <- "This is incorrect - remember that K corresponds to the number of groups being compared, and N is the total number of data points"
+
+ex() %>% check_mc(2, feedback_msgs = c(msg1, msg2, msg3, msg4))
+```
+
+---
+
+## ANOVA (4)
+
+```yaml
+type: MultipleChoiceExercise
+key: 88347e641c
+xp: 50
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+Look at the table again. The third column is the Sum of Squares (SS) that quantifies the variability between the groups of interest and within groups of interest in separate rows. 
+
+From the pre-session we know that the ANOVA uses these two different sum of squares, the SSW and SSB, to calculate the variance of between and within groups.  
+
+**From the ANOVA summary table, identify the correct values for the sum of squares (within) (SSW), and the sum of squares (between) (SSB). Remember, R represents between groups in the first row and within groups in the second row.** 
+
+`@possible_answers`
+- [SSB = 0.8539, SSW = 0.4535 ]
+- SSB = 2, SSW = 0.8539 
+- SSB = 42, SSW = 0.4535 
+- SSB = 0.4535, SSW = 0.8539
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+
+```
+
+`@sct`
+```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg1 <- "Correct!"
+msg4 <- "This is incorrect - remember, ANOVA represents between groups in the first row and within groups in the second row."
+msg2<-"This is incorrect - remember, ANOVA represents between groups in the first row and within groups in the second row."
+msg3 <- "This is incorrect - remember, ANOVA represents between groups in the first row and within groups in the second row."
+
+ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2, msg3, msg4))
+```
+
+---
+
+## ANOVA (5)
+
+```yaml
+type: MultipleChoiceExercise
+key: 1a9b31bcde
+xp: 50
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+The fourth column is the Mean Squares which is calculated by taking the Sum of Squares divided by degree of freedom for both parts. This is a variance estimate.  
+
+Then the F-statistic is obtained by dividing the mean squares of between by the mean of squares of the groups within. If this value is large then the chances are high that the variation between the group come from a statistically relevant effect, thus that the Null hypothesis can be rejected. Finally R also displays the p-value for us, so that we can just use it to make our decision. 
+
+**From the p-value obtained, what can you conclude?**
+
+`@possible_answers`
+- [Reject the null hypothesis]
+- Fail to reject the null hypothesis
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+
+```
+
+`@sct`
+```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg1 <- "Correct! You can see here that if we set our alpha at 0.05, the p value obtained from this analysis is less than 0.05, therefore we can reject the null hypothesis"
+msg2 <- "This is incorrect - the p value is less than alpha, therefore we can reject the null hypothesis"
+
+
+ex() %>% check_mc(1, feedback_msgs = c(msg1, msg2))
+```
+
+---
+
+## ANOVA (6)
+
+```yaml
+type: MultipleChoiceExercise
+key: ee90083209
+xp: 50
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+The pre-session showed you how to properly report the output of an ANOVA in a report or publication.  
+
+**What would be the most correct report of our ANOVA test?**
+
+`@possible_answers`
+- There was a significant difference in mean walking speed (F(2,42) = 0.8543, 2.21x10-10) within the groups. 
+- There was a significant difference in mean walking speed (F(3,45) = 39.54, 2.21 x10-10) between the groups. 
+- [There was a significant difference in mean walking speed (F(2, 42) = 39.54, p = 2.21x10-10) between the groups. Fail to reject the null hypothesis]
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+
+```
+
+`@sct`
+```{r}
+# Check https://instructor-support.datacamp.com/en/articles/2375523-course-multiple-choice-with-console-exercises on how to write feedback messages for this exercise.
+msg3 <- "Correct! This contains all the required elements in the correct place to report this result accurately"
+msg1 <- "This is incorrect - the df values are correct, but check that you can correctly identify which is the test statistic."
+msg2<-"This is incorrect - the test statistic is correct, but check that you can identify the degrees of freedom correctly."
+
+
+ex() %>% check_mc(3, feedback_msgs = c(msg1, msg2, msg3))
+```
+
+---
+
+## ANOVA (7)
+
+```yaml
+type: NormalExercise
+key: 95173bb69f
+xp: 100
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+`@instructions`
+Great! You now know how to run a one-way ANOVA analysis in R. 
+
+From the p-value obtained we reject the null hypothesis meaning that there are differences between the groups’ means. The ANOVA analysis confirmed this but as it stands now, we do not know where those differences come from - e.g.: group A different from B or is it B and C that are different? To determine where those differences exist, we need to run additional analyses: post-hoc tests. 
+
+A commonly used post-hoc tests is the Tukey Honest Significance tests. The R function is _TukeyHSD(fit)_, where fit is _aov(data~group)_. 
+
+**Use a Tukey test on our walk data to find out where the differences are.**
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+#insert some data here 
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
+#ANOVA1 for use later
+ANOVA1 <- aov(walk$speed~walk$treatment)
+```
+
+`@sample_code`
+```{r}
+#run a Tukey test using TukeyHSD() 
+
+```
+
+`@solution`
+```{r}
+#run a Tukey test using TukeyHSD() 
+TukeyHSD(ANOVA1) 
+```
+
+`@sct`
+```{r}
+ex() %>% check_function("TukeyHSD") %>% check_arg("x") %>% check_equal()
+```
+
+---
+
+## ANOVA (8)
+
+```yaml
+type: MultipleChoiceExercise
+key: c4c04b4607
+xp: 50
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+Look at the resulting table. The first column shows the differences between conditions, and the final column shows the adjusted p values. 
+
+We are interested in the last column where the p-values are reported. Since both p-values for the land and water treatment are below 0.05, we reject the null hypothesis, and we can state that they are significantly different from the control group which have not received any treatment. However, there is no significant difference between the land or water walking treatments. 
+
+Moreover, we can use for example the diff column, which shows the mean difference between each pair, to further explain/justify the results. The land physio group was 0.21 m/s slower than the control and the water physio was even slower. 
+
+**Which is the most effective treatment to restore walking speed?**
+
+`@possible_answers`
+- Water-based Physiotherapy 
+- Land-based Physiotherapy 
+- Both 
+- [None]
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+
+```
+
+`@sct`
+```{r}
+msg1 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this experiment?" 
+msg2 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this experiment?"
+msg3 <- "That's not quite right - although both comparisons are statistically significant, what does that actually mean for the interpretation of this experiment?"
+msg4 <- "That's correct - both comparisons between control and treatment are significantly different, however, the control group that have not received any treatment still show faster walking speed"
+ex() %>% check_mc(4, feedback_msgs = c(msg1, msg2, msg3, msg4))
+```
+
+---
+
+## ANOVA (9)
+
+```yaml
+type: NormalExercise
+key: 7b83a9f1da
+xp: 100
+```
+
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+
+To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+
+- Data needs to be normally distributed 
+- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
+- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
+
+Let’s look at an example. 
+
+`@instructions`
+To run ANOVA in R, data need to be in the same format as the one provided in the example. 
+
+If the data are not in that format you can either use the function `stack` to stack the vectors of your data frame one after another or step by step as shown in the following examples. 
+
+In the dataframe `data1` there are 3 groups to compare: a, b and c. 
+
+Print `data1` - you should notice that this is not the correct format to run ANOVA in R. 
+
+The function _stack()_ can be used to convert this into an appropriate format. 
+
+**Use `stack` to convert `data1` in this way and print it to the screen to see the difference.**
+
+`@hint`
+
+
+`@pre_exercise_code`
+```{r}
+#data1
+a<-c(3,5,6,7)
+b<-c(7,8,10,11)
+c<-c(4,4,5,6)
+data1=data.frame(a,b,c)
+```
+
+`@sample_code`
+```{r}
+#Example 1
+#print data1
+
+#use the function stack to create the desired data format and assign it stacked 
+
+#print stacked
+
 
 ```
 
