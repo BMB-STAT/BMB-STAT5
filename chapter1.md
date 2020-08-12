@@ -650,9 +650,7 @@ skills: 1
 
 In the pre-session we have introduced you to the three assumption of a t-test that needs to be fulfilled so we can perform a t-test on the sample. While we can determine if the data set contains a continuous dependent and a bivariate independent variable by looking at the data, we can use some plots in R to establish the other two assumptions: **normal distribution and equal variance**.  
 
-Remember we can look at a histogram of the data to verify normal distribution. 
-
-
+Remember we can look at a histogram of the data to verify normal distribution.
 
 `@possible_answers`
 - Testing whether the genotype of transgenic mice (homozygous, heterozygous or wild type for mutation A) affects the blood glucose level.
@@ -1089,7 +1087,7 @@ skills: 1
 
 In the pre-session we have introduced you to the three assumption of a t-test that needs to be fulfilled so we can perform a t-test on the sample. While we can determine if the data set contains a continuous dependent and a bivariate independent variable by looking at the data, we can use some plots in R to establish the other two assumptions: **normal distribution and equal variance**.  
 
-Remember we can look at a histogram of the data to verify normal distribution. 
+Remember we can look at a histogram of the data to verify normal distribution.
 
 `@instructions`
 Draw a histogram of the `heights` data you used for the one sample t test.
@@ -1134,7 +1132,7 @@ skills: 1
 
 The data seems to follow roughly a normal distribution. There was another plot that helps us to check if the data is normally distributed: the QQ plot. 
 
-Use the qqnorm() and qqline() function to test whether the heights data appear normally distributed. 
+Use the qqnorm() and qqline() function to test whether the heights data appear normally distributed.
 
 `@instructions`
 Use the `qqnorm()` and `qqline()` functions to test whether the `heights` data appear normally distributed.
@@ -1188,7 +1186,7 @@ skills: 1
 
 Finally, we need to check if the variance of the samples we are comparing is equal. To do so, we can use summary statistics like the _boxplot_ function. 
 
-Remember that R automatically uses the Welch’s t-test that does not assume equal variance. But if we are certain that our samples show equal variance, we can specify this by adding the argument var.equal=TRUE in our code. 
+Remember that R automatically uses the Welch’s t-test that does not assume equal variance. But if we are certain that our samples show equal variance, we can specify this by adding the argument var.equal=TRUE in our code.
 
 `@instructions`
 
@@ -1249,7 +1247,7 @@ To run an ANOVA analysis similarly to t-test the following assumptions need to b
 - Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
 - Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
 
-Let’s look at an example. 
+Let’s look at an example.
 
 `@instructions`
 We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury. 
@@ -1301,8 +1299,7 @@ key: 23d47c9d49
 xp: 100
 ```
 
-From the box plot you could qualitatively appreciate the differences between groups. Let’s now formally assess if the walking speed changes based on treatment received by running an ANOVA analysis. 
-
+From the box plot you could qualitatively appreciate the differences between groups. Let’s now formally assess if the walking speed changes based on treatment received by running an ANOVA analysis.
 
 `@instructions`
 In R ANOVA is run by using the _aov()_ function. To visualise the output of the analysis the function _summary()_ is used. 
@@ -1353,7 +1350,7 @@ R represents the results of an ANOVA in a table. The first column represents the
 
 The second column represents the degree of freedom (Df). We have introduced the two different degrees of freedom in an ANOVA and how they are related to the number of groups (K) and the overall observations/replicates.  
 
-**By looking at the table can you conclude from the degree of freedom values the correct number of groups/samples (K) and the total number of observation (N)?** 
+**By looking at the table can you conclude from the degree of freedom values the correct number of groups/samples (K) and the total number of observation (N)?**
 
 `@possible_answers`
 - K = 2, N = 42
@@ -1397,7 +1394,7 @@ Look at the results table again. The third column is the Sum of Squares (SS) tha
 
 From the pre-session we know that the ANOVA uses these two different sum of squares, the SSW and SSB, to calculate the variance of between and within groups.  
 
-**From the ANOVA summary table, identify the correct values for the sum of squares (within) (SSW), and the sum of squares (between) (SSB). Remember, R represents between groups in the first row and within groups in the second row.** 
+**From the ANOVA summary table, identify the correct values for the sum of squares (within) (SSW), and the sum of squares (between) (SSB). Remember, R represents between groups in the first row and within groups in the second row.**
 
 `@possible_answers`
 - [SSB = 0.8539, SSW = 0.4535 ]
@@ -1609,7 +1606,7 @@ xp: 100
 
 To run ANOVA in R, data need to be in the same format as the one provided in the example. 
 
-If the data are not in that format you can either use the function `stack` to stack the vectors of your data frame one after another or step by step as shown in the following examples. 
+If the data are not in that format you can either use the function `stack` to stack the vectors of your data frame one after another or step by step as shown in the following examples.
 
 `@instructions`
 In the dataframe `data1` there are 3 groups to compare: a, b and c. 
