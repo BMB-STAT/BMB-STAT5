@@ -1385,7 +1385,10 @@ The second column represents the degree of freedom (df). We have introduced the 
 
 `@pre_exercise_code`
 ```{r}
-
+#insert some data here 
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
+#ANOVA1 for use later
+ANOVA1 <- aov(walk$speed~walk$treatment)
 ```
 
 `@sct`
