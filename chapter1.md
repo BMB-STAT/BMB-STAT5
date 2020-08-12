@@ -1254,7 +1254,7 @@ Let’s look at an example.
 `@instructions`
 We want to assess the walking speed among 3 population groups categorised by the treatment received following a knee injury. 
 
-Look at the dataset named walk. If you look at the data, you see that you have 2 columns: one column contains walking speed values (numerical values) and the second column the corresponding groups. These are categorical values. The categorical values dictate how to group your data. 
+Look at the dataset named `walk`. If you look at the data, you see that you have 2 columns: one column contains walking `speed` values (numerical values) and the second column the corresponding groups. These are categorical values. The categorical values dictate how to group your data. 
 
 We want to test the following null hypothesis: 
 
@@ -1316,7 +1316,7 @@ From the box plot you could qualitatively appreciate the differences between gro
 
 In R ANOVA is run by using the _aov()_ function. To visualise the output of the analysis the function _summary()_ is used. 
 
-Tip: the results of the ‘aov’ function needs to be assigned to a new variable (e.g.:ANOVA1<-…) and you use the ~ symbol to group values according to the category they belong to.
+Tip: the results of the `aov` function needs to be assigned to a new variable (e.g.:ANOVA1<-…) and you use the ~ symbol to group values according to the category they belong to.
 
 `@hint`
 Remember, aov needs to work on data (for example speed) and you need to indicate how the data should be grouped (for example treatment).
