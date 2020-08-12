@@ -1368,9 +1368,9 @@ To run an ANOVA analysis similarly to t-test the following assumptions need to b
 
 Let’s look at an example. 
 
-R represents the results of an ANOVA in a table. The first column represents the source of variation, both between groups (1st row - treatment) and within groups (second row - Residuals). DF stands for degree of freedom. 
+R represents the results of an ANOVA in a table. The first column represents the source of variation, both between groups (1st row - treatment) and within groups (second row - Residuals). Df stands for degree of freedom. 
 
-The second column represents the degree of freedom (df). We have introduced the two different degrees of freedom in an ANOVA and how they are related to the number of groups (K) and the overall observations/replicates.  
+The second column represents the degree of freedom (Df). We have introduced the two different degrees of freedom in an ANOVA and how they are related to the number of groups (K) and the overall observations/replicates.  
 
 **By looking at the table can you conclude from the degree of freedom values the correct number of groups/samples (K) and the total number of observation (N)?** 
 
