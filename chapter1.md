@@ -1301,19 +1301,10 @@ key: 23d47c9d49
 xp: 100
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
-
-`@instructions`
 From the box plot you could qualitatively appreciate the differences between groups. Let’s now formally assess if the walking speed changes based on treatment received by running an ANOVA analysis. 
 
+
+`@instructions`
 In R ANOVA is run by using the _aov()_ function. To visualise the output of the analysis the function _summary()_ is used. 
 
 Tip: the results of the `aov` function needs to be assigned to a new variable (e.g.:ANOVA1<-…) and you use the ~ symbol to group values according to the category they belong to.
@@ -1357,16 +1348,6 @@ type: MultipleChoiceExercise
 key: e9958f5697
 xp: 50
 ```
-
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
 
 R represents the results of an ANOVA in a table. The first column represents the source of variation, both between groups (1st row - treatment) and within groups (second row - Residuals). Df stands for degree of freedom. 
 
@@ -1412,17 +1393,7 @@ key: 88347e641c
 xp: 50
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
-
-Look at the table again. The third column is the Sum of Squares (SS) that quantifies the variability between the groups of interest and within groups of interest in separate rows. 
+Look at the results table again. The third column is the Sum of Squares (SS) that quantifies the variability between the groups of interest and within groups of interest in separate rows. 
 
 From the pre-session we know that the ANOVA uses these two different sum of squares, the SSW and SSB, to calculate the variance of between and within groups.  
 
@@ -1466,16 +1437,6 @@ key: 1a9b31bcde
 xp: 50
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
-
 The fourth column is the Mean Squares which is calculated by taking the Sum of Squares divided by degree of freedom for both parts. This is a variance estimate.  
 
 Then the F-statistic is obtained by dividing the mean squares of between by the mean of squares of the groups within. If this value is large then the chances are high that the variation between the group come from a statistically relevant effect, thus that the Null hypothesis can be rejected. Finally R also displays the p-value for us, so that we can just use it to make our decision. 
@@ -1517,16 +1478,6 @@ key: ee90083209
 xp: 50
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
-
 The pre-session showed you how to properly report the output of an ANOVA in a report or publication.  
 
 **What would be the most correct report of our ANOVA test?**
@@ -1541,7 +1492,10 @@ The pre-session showed you how to properly report the output of an ANOVA in a re
 
 `@pre_exercise_code`
 ```{r}
-
+#insert some data here 
+walk <- data.frame(subject = 1:45, speed = c(1.4,1.2,1.3,1.3,1.4,1.4,1.3,1.5,1.3,1.2,1.3,1.4,1.4,1.3,1.3,0.94,0.95,0.97,0.95,0.95,0.94,0.97,0.96,0.94,0.94,0.97,1.1,1.2,1.12,1.1,1,1.27,1.4,1.00,0.98,1,1.2,1.08,1.00,1,1.07,1.29,1.18,1.08,1.27), treatment = c(rep("control", 15),rep("water", 15),rep("land", 15)))
+#ANOVA1 for use later
+ANOVA1 <- aov(walk$speed~walk$treatment)
 ```
 
 `@sct`
@@ -1565,22 +1519,12 @@ key: 95173bb69f
 xp: 100
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
-
-`@instructions`
 Great! You now know how to run a one-way ANOVA analysis in R. 
 
-From the p-value obtained we reject the null hypothesis meaning that there are differences between the groups’ means. The ANOVA analysis confirmed this but as it stands now, we do not know where those differences come from - e.g.: group A different from B or is it B and C that are different? To determine where those differences exist, we need to run additional analyses: post-hoc tests. 
+From the p-value obtained we reject the null hypothesis meaning that there are differences between the groups’ means. The ANOVA analysis confirmed this but as it stands now, we do not know where those differences come from - e.g.: group A different from B or is it B and C that are different? To determine where those differences exist, we need to run additional analyses: post-hoc tests.
 
-A commonly used post-hoc tests is the Tukey Honest Significance tests. The R function is _TukeyHSD(fit)_, where fit is _aov(data~group)_. 
+`@instructions`
+A commonly used post-hoc tests is the `Tukey` Honest Significance tests. The R function is _TukeyHSD(fit)_, where fit is _aov(data~group)_. 
 
 **Use a Tukey test on our walk data to find out where the differences are.**
 
@@ -1621,16 +1565,6 @@ type: MultipleChoiceExercise
 key: c4c04b4607
 xp: 50
 ```
-
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
 
 Look at the resulting table. The first column shows the differences between conditions, and the final column shows the adjusted p values. 
 
@@ -1673,24 +1607,14 @@ key: 7b83a9f1da
 xp: 100
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
-
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
-
-- Data needs to be normally distributed 
-- Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
-- Equal variances between groups (Homogeneity of variances, Homoscedasticity) 
-
-Let’s look at an example. 
-
-`@instructions`
 To run ANOVA in R, data need to be in the same format as the one provided in the example. 
 
 If the data are not in that format you can either use the function `stack` to stack the vectors of your data frame one after another or step by step as shown in the following examples. 
 
+`@instructions`
 In the dataframe `data1` there are 3 groups to compare: a, b and c. 
 
-Print `data1` - you should notice that this is not the correct format to run ANOVA in R. 
+Print `data1` - you should notice that this is not the correct format to run an ANOVA in R. 
 
 The function _stack()_ can be used to convert this into an appropriate format. 
 
