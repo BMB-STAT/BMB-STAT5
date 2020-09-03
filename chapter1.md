@@ -1239,9 +1239,9 @@ key: b01bf1a570
 xp: 100
 ```
 
-In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them come from a different population.  
+In the emodule you have learned that we can use an analysis of variance (ANOVA) to compare several groups to see if at least one of them comes from a different population.  
 
-To run an ANOVA analysis similarly to t-test the following assumptions need to be satisfied: 
+Similar to the t-test,to run an ANOVA analysis the following assumptions need to be satisfied: 
 
 - Data needs to be normally distributed 
 - Data should be from independent observations, which means that there is no relationship between the observations in each group or between the groups themselves. 
@@ -1350,7 +1350,7 @@ R represents the results of an ANOVA in a table. The first column represents the
 
 The second column represents the degree of freedom (Df). We have introduced the two different degrees of freedom in an ANOVA and how they are related to the number of groups (K) and the overall observations/replicates.  
 
-**By looking at the table can you conclude from the degree of freedom values the correct number of groups/samples (K) and the total number of observation (N)?**
+**By looking at the table can you conclude from the degree of freedom values in the table the correct number of groups/samples (K) and the total number of observation (N)?**
 
 `@possible_answers`
 - K = 2, N = 42
@@ -1436,7 +1436,7 @@ xp: 50
 
 The fourth column is the Mean Squares which is calculated by taking the Sum of Squares divided by degree of freedom for both parts. This is a variance estimate.  
 
-Then the F-statistic is obtained by dividing the mean squares of between by the mean of squares of the groups within. If this value is large then the chances are high that the variation between the group come from a statistically relevant effect, thus that the Null hypothesis can be rejected. Finally R also displays the p-value for us, so that we can just use it to make our decision. 
+Then the F-statistic is obtained by dividing the mean squares of between the groups by the mean of squares of the groups within. If this value is large then the chances are high that the variation between the group come from a statistically relevant effect, thus that the Null hypothesis can be rejected. Finally R also displays the p-value for us, so that we can just use it to make our decision. 
 
 **From the p-value obtained, what can you conclude?**
 
@@ -1482,7 +1482,7 @@ The pre-session showed you how to properly report the output of an ANOVA in a re
 `@possible_answers`
 - There was a significant difference in mean walking speed (F(2,42) = 0.8543, 2.21x10-10) within the groups. 
 - There was a significant difference in mean walking speed (F(3,45) = 39.54, 2.21 x10-10) between the groups. 
-- [There was a significant difference in mean walking speed (F(2, 42) = 39.54, p = 2.21x10-10) between the groups. Fail to reject the null hypothesis]
+- [There was a significant difference in mean walking speed (F(2, 42) = 39.54, p = 2.21x10-10) between the groups. Thus, we reject the null hypothesis]
 
 `@hint`
 
@@ -1567,7 +1567,7 @@ Look at the resulting table. The first column shows the differences between cond
 
 We are interested in the last column where the p-values are reported. Since both p-values for the land and water treatment are below 0.05, we reject the null hypothesis, and we can state that they are significantly different from the control group which have not received any treatment. However, there is no significant difference between the land or water walking treatments. 
 
-Moreover, we can use for example the diff column, which shows the mean difference between each pair, to further explain/justify the results. The land physio group was 0.21 m/s slower than the control and the water physio was even slower. 
+Moreover, we can use for example the diff column, which shows the mean difference between each pair, to further explain/justify the results. The land physiotherapy group was 0.21 m/s slower than the control and the water physiotherapy was even slower. 
 
 **Which is the most effective treatment to restore walking speed?**
 
